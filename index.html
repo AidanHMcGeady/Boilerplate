@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <!--This line connects to A-Frame, letting us use their content-->
+        <script src="https://aframe.io/releases/0.2.0/aframe.min.js"></script>
+
+        <!--This line enables the program to function properly on Apple devices-->
+        <meta name="apple-mobile-web-app-capable" content="yes"/> 
+
+        <body>
+            <a-scene>
+                <!-- AFrame recommends using an asset library like this, to manage all of the textures, videos, images, shapes and more -->
+                <!-- Only change the content within the quotiations of the src=" " line to the assets that will get used for this version  -->
+
+                <a-assets>
+                    <video
+                        id="Video"
+                        src="https://d3enugwsxrofbk.cloudfront.net/360%20videos%20-%203840*1920/Exterior/Exterior_High.mp4" 
+                        crossorigin="anoymous"
+                        autoplay 
+                        muted
+                        webkit-playinline 
+                    ></video>
+
+                    <!--These are the textures which will be used for the choice boxes, only change the src path to the correct one-->
+                    
+                    <img
+                    id="ChoiceA" 
+                    src="src\assets\images\360.png"
+                    />
+
+                    <img
+                    id="ChoiceB" 
+                    src="src\assets\images\360.png"
+                    />
+                    
+                    <img 
+                    id="ChoiceC" 
+                    src="src\assets\images\360.png"
+                    />
+
+                    <img 
+                    id="Button" 
+                    src="src\assets\images\360.png"
+                    />
+                </a-assets>
+
+                <!-- User viewpoint -->
+                <a-camera 
+                position="0 0 0">
+                    <a-cursor 
+                    color="#4287f5"
+                    >
+                    </a-cursor>   
+                </a-camera>
+
+                <!-- The 360 Video -->
+                <a-videosphere
+                    id="env" 
+                    src="#Video"
+                    rotation="0 145 2"
+                    >
+                </a-videosphere>
+
+                <!-- Option A -->
+                <a-plane
+                    id="A" 
+                    color="red" 
+                    position="-8 -3 -10" rotation="0 0 0" 
+                    height="4" width="6"
+                    >      
+                    <a-cylinder
+                        id="A1" src="#Button" 
+                        color="white" 
+                        position="0 -2 0" rotation="90 0 0" 
+                        height=".5" width="1"
+                    ></a-cylinder>              
+                </a-plane>
+
+                <!-- Option B -->
+                <a-plane
+                    id="B" 
+                    color="green" 
+                    position="0 -3 -10" rotation="0 0 0" 
+                    height="4" width="6" 
+                    ><a-cylinder
+                        id="B1" src="#Button" 
+                        color="white" 
+                        position="0 -2 0" rotation="90 0 0" 
+                        height=".5" width="1"
+                    ></a-cylinder>
+                </a-plane>
+
+                <!-- Option C -->
+                <a-plane
+                    id="C"
+                    color="blue" 
+                    position="8 -3 -10" rotation="0 0 0" 
+                    height="4" width="6"
+                    >
+                    <a-cylinder
+                        id="C1" src="#Button" 
+                        color="white" 
+                        position="0 -2 0" rotation="90 0 0" 
+                        height=".5" width="1"
+                    ></a-cylinder>
+                </a-plane>
+            </a-scene>
+
+            <script>
+                /*  You can change these 3 URLs to the new pages. 
+                    Just make sure that the link still has a quotation marks around it ( " " )
+                */
+
+                var srcA = "http://127.0.0.1:5500/src/screens/Content/TestingVideo/Test-01.html";
+                var srcB = "https://d3enugwsxrofbk.cloudfront.net/360%20videos%20-%203840*1920/Exterior/Exterior_High.mp4";
+                var srcC = "http://www.google.com";
+                
+                //DO NOT EDIT BELOW THIS POINT!!!
+
+                var A1 = document.querySelector( '#A1' );
+                var lookA = false;
+                var chooseA = 0;
+
+                setInterval(function()
+                {
+                    if(lookA == true)
+                    chooseA += 0.5;
+
+                    if(lookA == false)
+                    chooseA = 0;
+
+                    console.log("A = ", chooseA);
+
+                    if(chooseA > 1)
+                    {
+                        window.open(srcA,'_blank');
+                        window.close();
+                    }
+                }, 1000);
+
+                A1.addEventListener("mouseenter", function()
+                {
+                    lookA = true;
+                    console.log("entered", lookA);
+                })
+
+                A1.addEventListener("mouseleave", function()
+                {
+                    lookA = false;
+                    console.log("left");
+                })                
+
+                var B1 = document.querySelector( '#B1' );
+                var lookB = false;
+                var chooseB = 0;
+
+                setInterval(function()
+                {
+                    if(lookB == true)
+                    chooseB += 0.5;
+
+                    if(lookB == false)
+                    chooseB = 0;
+
+                    console.log("B = ", chooseB, "and looking at B?", lookB );
+
+                    if(chooseB > 1)
+                    {
+                        window.open(srcB,'_blank');
+                        window.close();
+                    }
+                }, 1000);
+
+                B1.addEventListener("mouseenter", function()
+                {
+                    lookB = true;
+                })
+
+                B1.addEventListener("mouseleave", function()
+                {
+                    lookB = false;
+                })
+
+                var C1 = document.querySelector( '#C1' );
+                var lookC = false;
+                var chooseC = 0;
+
+                setInterval(function()
+                {
+                    if(lookC == true)
+                    chooseC += 0.5;
+
+                    if(lookC == false)
+                    chooseC = 0;
+
+                    console.log("C = ", chooseC, "and looking at C?", lookC );
+
+                    if(chooseC > 1)
+                    {
+                        window.open(srcC,'_blank');
+                        window.close();
+                    }
+                }, 1000);
+
+                C1.addEventListener("mouseenter", function()
+                {
+                    lookC = true;
+                })
+
+                C1.addEventListener("mouseleave", function()
+                {
+                    lookC = false;
+                })
+            </script>
+            
+            <!-- DO NOT EDIT BELOW THIS POINT!!! -->
+
+            <!-- This script hold all of the mechanics for decision A -->
+            <script>
+                var A = document.querySelector( '#A')
+                A.addEventListener("mouseenter", function()
+                {
+                    A.setAttribute("position", 
+                    {
+                        x: -3,
+                        y: -1,
+                        z: -5
+                    })
+
+                    A.setAttribute("rotation", 
+                    {
+                        x: 0,
+                        y: 30,
+                        z: 0
+                    })
+                })
+                A.addEventListener("mouseleave", function()
+                {
+                    A.setAttribute("position", 
+                    {
+                        x: -8,
+                        y: -3,
+                        z: -10
+                    })
+
+                    A.setAttribute("rotation", 
+                    {
+                        x: 0,
+                        y: 0,
+                        z: 0
+                    })
+                })
+            </script>
+            
+            <!-- This script hold all of the mechanics for decision B -->
+            <script>
+                var B = document.querySelector( '#B')
+                B.addEventListener("mouseenter", function()
+                {
+                    B.setAttribute("position", 
+                    {
+                        x: 0,
+                        y: -1,
+                        z: -5
+                    })
+
+                    B.setAttribute("rotation", 
+                    {
+                        x: 0,
+                        y: 0,
+                        z: 0
+                    })
+                })
+                B.addEventListener("mouseleave", function()
+                {
+                    B.setAttribute("position", 
+                    {
+                        x: 0,
+                        y: -3,
+                        z: -10
+                    })
+
+                    B.setAttribute("rotation", 
+                    {
+                        x: 0,
+                        y: 0,
+                        z: 0
+                    })
+                })
+            </script>
+            
+            <!-- This script hold all of the mechanics for decision C -->
+            <script>
+                var C = document.querySelector( '#C')
+                C.addEventListener("mouseenter", function()
+                {
+                    C.setAttribute("position", 
+                    {
+                        x: 3,
+                        y: -1,
+                        z: -5
+                    })
+
+                    C.setAttribute("rotation", 
+                    {
+                        x: 0,
+                        y: -30,
+                        z: 0
+                    })
+                })
+                C.addEventListener("mouseleave", function()
+                {
+                    C.setAttribute("position", 
+                    {
+                        x: 8,
+                        y: -3,
+                        z: -10
+                    })
+
+                    C.setAttribute("rotation", 
+                    {
+                        x: 0,
+                        y: 0,
+                        z: 0
+                    })
+                })
+            </script>
+        </body>
+    </head>
+</html>
